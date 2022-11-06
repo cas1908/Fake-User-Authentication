@@ -1,5 +1,5 @@
 import { Verify } from "../App"
-
+import useDocumentTitle from "./useDocumentTitle"
 
 const Home = ()=>{
     useDocumentTitle('Home - fakeuserAuth')

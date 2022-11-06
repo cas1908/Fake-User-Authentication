@@ -1,6 +1,7 @@
 
 import { useNavigate } from "react-router-dom"
 import Loading from "./Loading"
+import useDocumentTitle from "./useDocumentTitle"
 
 const Login = ()=> {
 useDocumentTitle('Login - fakeuserAuth')
