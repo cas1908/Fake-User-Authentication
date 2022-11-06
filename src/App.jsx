@@ -21,7 +21,7 @@ export function App() {
 
     
   return (
-          <ErrorBoundary FallbackComponent={<ErrorBoundary/>}>
+          <ErrorBoundary FallbackComponent={ErrorBoundary}>
       <BrowserRouter>
     <main>
          <Routes>
