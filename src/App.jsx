@@ -3,6 +3,7 @@ import './App.css'
 import Loading from './components/Loading'
 import Login from './components/Login'
 import Home from './components/Home'
+import Navigation from './components/Navigation'
 import Page404 from './components/Page404'
 import {ErrorBoundary} from 'react-error-boundary'
 import { createContext, useContext, useState } from 'react'
@@ -25,41 +26,44 @@ export function App() {
       <BrowserRouter>
     <main>
          <Routes>
-            <Route path='/' element={<Home/>}/>
-              <Route path='/login' element={<Login/>}/>
-             <Route path='/loading' element={<Loading/>}/>
+            <Route path='/' element={<Home />}/>
+            <Route path='/login' element={<Login/>}/>
+            <Route path='/loading' element={<Loading/>}/>
+            <Route path='/verify' element={<Verify/>}/>
              <Route path='*' element={<Page404/>}/>
-
-</Routes>
+          </Routes>
              
-      React ⚛️ + Vite ⚡ + Replit 🌀
+     
     </main>
     </BrowserRouter>
-        </ErrorBoundary>
+</ErrorBoundary>
   )
 }
 
 export function Verify (){
-const AuthenticateUser = useContext(Authenticate)
-    const [verified, isVerified] = useState(true)
+const {AuthenticateUser} = useContext(Authenticate)
+    const [verified, isVerified] = useState(AuthenticateUser)
     
     const UserVerification = ()=> {
-        isVerified(true)
+        isVerified({isAuthenticated: true})
        console.log(AuthenticateUser)
     console.log(verified)
 
-// console.log(AuthenticateUser.isAuthenticated)
        
     } 
         if (verified) {
-        return <div>verified</div>
+        return  <div className='verified'> <Navigation />
+            <img src='success-green-check-mark-icon.png' alt='checkmark' />
+        </div>
     }
     return  (
         <Authenticate.Provider value={verified}>
-        <div>
-            <button onClick={UserVerification}>Verify</button>
+          <Navigation />
+        <div className='verify'>
+            <button className="verify-btn" onClick={UserVerification}>Verify</button>
+
         </div>
-            </Authenticate.Provider>
+        </Authenticate.Provider>
     )
 
 }

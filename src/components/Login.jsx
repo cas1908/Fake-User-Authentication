@@ -1,6 +1,6 @@
 
 import { useNavigate } from "react-router-dom"
-import Loading from "./Loading"
+import Home from "./Home"
 import useDocumentTitle from "./useDocumentTitle"
 
 const Login = ()=> {
@@ -8,7 +8,7 @@ useDocumentTitle('Login - fakeuserAuth')
     const navigate = useNavigate()
 
     
-    const  getUser = (e)=> {
+    const getUser = (e)=> {
         e.preventDefault()
         const user = e.target
         if ((user.username.value && user.password.value) !== "") {
@@ -16,24 +16,22 @@ useDocumentTitle('Login - fakeuserAuth')
                 navigate('/')
             },5000)
            navigate('/loading') 
-        
+
           
          console.log(user.username.value)
         console.log(user.password.value)
+        return   <Home user={user.username.value}/>
         }
        
-         
-      // if (user.username.value !== "") return redirect('/')
+
 
     } 
     
  return (
         <form onSubmit={getUser}> 
             <input type="text" name="username" placeholder="Enter username"/> 
-            <br/>
-            <br/>    
-            <input type="password" name="password" placeholder="Enter password"/> 
             <br/> 
+            <input type="password" name="password" placeholder="Enter password"/> 
             <br/> 
             <button>Sign In</button>   
         </form>
