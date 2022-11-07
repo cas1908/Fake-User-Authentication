@@ -104,6 +104,9 @@ nav {
     background-repeat: no-repeat;
   background-position: center;
 }
+.loading img{
+    width:100%;
+}
 
 @media screen and (min-width:700px){
     body::after {
