@@ -96,13 +96,8 @@ nav {
     font-size: 1.2rem;
 }
 .loading {
-  background-image: url('loader.gif');
- min-height: 80vh;
+    min-height: 80vh;
     margin: 5% auto;
-    width: 90%;
-    background-size: contain;
-    background-repeat: no-repeat;
-  background-position: center;
 }
 .loading img{
     width:100%;

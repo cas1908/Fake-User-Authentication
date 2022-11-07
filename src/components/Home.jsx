@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import useDocumentTitle from "./useDocumentTitle"
 const Home = ()=>{
     const [user, setUser] = useState(null)
-    // const handleLogin = () => setUser({name: 'cas' });
 const handleLogout = () => {
     setUser(null);
     navigate('/login')
