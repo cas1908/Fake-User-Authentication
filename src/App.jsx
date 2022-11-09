@@ -9,11 +9,12 @@ import PageNotFound from './components/PageNotFound'
 import {ErrorBoundary} from 'react-error-boundary'
 import { createContext, useContext, useState } from 'react'
 
+
 const UserAuthentication = {
     isAuthenticated: false
 }
 
-const Authenticate = createContext(UserAuthentication.isAuthenticated)
+const Authenticate = createContext(UserAuthentication)
 
 
 
@@ -21,16 +22,20 @@ const Authenticate = createContext(UserAuthentication.isAuthenticated)
 
 export function App() {
     
-    
+    const [user, setUser] = useState(null)
+ // const [verified, isVerified] = useState(Authenticate)
+    // console.log(verified)
+    console.log(Authenticate)
   return (
+              <Authenticate.Provider value={UserAuthentication}>
           <ErrorBoundary FallbackComponent={ErrorBoundaryPage}>
       <BrowserRouter>
     <main>
          <Routes>
-            <Route path='/' element={<Home />}/>
-            <Route path='/login' element={<Login/>}/>
+            <Route path='/' element={<Home setUser={setUser} user={user}/>}><Route path='/verification-message'/></Route>
+            <Route path='/login' element={<Login setUser={setUser}/>}/>
             <Route path='/loading' element={<Loading/>}/>
-            <Route path='/verify' element={<Verify/>}/>
+            <Route path='/verify' element={<Verify />}/>
              <Route path='*' element={<PageNotFound/>}/>
           </Routes>
              
@@ -38,33 +43,45 @@ export function App() {
     </main>
     </BrowserRouter>
 </ErrorBoundary>
+                   </Authenticate.Provider>
   )
 }
 
 export function Verify (){
-const {AuthenticateUser} = useContext(Authenticate)
-    const [verified, isVerified] = useState(AuthenticateUser)
-    
-    const UserVerification = ()=> {
-        isVerified({isAuthenticated: true})
-       console.log(AuthenticateUser)
-    console.log(verified)
 
-       
-    } 
-        if (verified) {
-        return  <div className='verified'> <Navigation />
-            <img src='success-green-check-mark-icon.png' alt='checkmark' />
-        </div>
+const value = useContext(Authenticate)
+        const [verified, isVerified] = useState(value)
+    const UserVerification = ()=> {
+       if  (!verified.isAuthenticated) {
+           isVerified({isAuthenticated: true})
+            console.log(Authenticate)
+       } else {
+         isVerified({isAuthenticated: false})  
+       }
+       // console.log(AuthenticateUser)
+    console.log(verified)
     }
+    if (verified.isAuthenticated) {
+                return  <div className='verified'> 
+                        <Navigation />
+                        <img src='success-green-check-mark-icon.png' alt='checkmark' />
+                    </div>
+     } 
+
+        
+
+        
+        
+    
     return  (
-        <Authenticate.Provider value={verified}>
+        <div>
+        
           <Navigation />
         <div className='verify'>
             <button className="verify-btn" onClick={UserVerification}>Verify</button>
 
         </div>
-        </Authenticate.Provider>
+       </div>
     )
 
 }

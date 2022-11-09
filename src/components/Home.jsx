@@ -1,23 +1,28 @@
 import Navigation from "./Navigation"
-import { useState } from "react"
+// import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import useDocumentTitle from "./useDocumentTitle"
-const Home = ()=>{
-    const [user, setUser] = useState(null)
+import { useEffect } from "react"
+const Home = ({user, setUser})=>{
+     const navigate = useNavigate()
+    useEffect(()=>{
+      if (!user) {
+      navigate('/login')
+  }  
+    }, [user])
+
 const handleLogout = () => {
     setUser(null);
     navigate('/login')
 }
     console.log(user)
-        const navigate = useNavigate()
+       
     useDocumentTitle('Home - fakeuserAuth')
-      if (!user) {
-      navigate("/login")
-  } else navigate("/")
+      
     return (
         <div>
             <Navigation />
-            <h1>Hello User</h1>
+            <h1>Hello {user}</h1>
             <div className="home-btns">
                 <button onClick={()=>{
                 navigate('/verify')
