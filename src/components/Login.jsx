@@ -1,26 +1,23 @@
 
 import { useNavigate } from "react-router-dom"
-import Home from "./Home"
 import useDocumentTitle from "./useDocumentTitle"
 
-const Login = ()=> {
+const Login = ({setUser})=> {
 useDocumentTitle('Login - fakeuserAuth')
     const navigate = useNavigate()
-
-    
+    // isVerified({isAuthenticated: false})
     const getUser = (e)=> {
         e.preventDefault()
         const user = e.target
+        setUser(user.username.value) 
         if ((user.username.value && user.password.value) !== "") {
             setTimeout(()=>{
                 navigate('/')
             },5000)
+        
            navigate('/loading') 
 
-          
-         console.log(user.username.value)
-        console.log(user.password.value)
-        return   <Home user={user.username.value}/>
+
         }
        
 
