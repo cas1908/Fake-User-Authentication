@@ -21,19 +21,20 @@ const Authenticate = createContext(UserAuthentication)
 
 
 export function App() {
-    
+    const value = useContext(Authenticate)
     const [user, setUser] = useState(null)
- // const [verified, isVerified] = useState(Authenticate)
+ const [verified, isVerified] = useState(value)
     // console.log(verified)
     console.log(Authenticate)
   return (
-              <Authenticate.Provider value={UserAuthentication}>
-          <ErrorBoundary FallbackComponent={ErrorBoundaryPage}>
+      <ErrorBoundary FallbackComponent={ErrorBoundaryPage}>
+              <Authenticate.Provider value={{verified, isVerified}}>
+          
       <BrowserRouter>
     <main>
          <Routes>
             <Route path='/' element={<Home setUser={setUser} user={user}/>}><Route path='/verification-message'/></Route>
-            <Route path='/login' element={<Login setUser={setUser}/>}/>
+            <Route path='/login' element={<Login isVerified={isVerified} setUser={setUser}/>}/>
             <Route path='/loading' element={<Loading/>}/>
             <Route path='/verify' element={<Verify />}/>
              <Route path='*' element={<PageNotFound/>}/>
@@ -42,15 +43,16 @@ export function App() {
      
     </main>
     </BrowserRouter>
-</ErrorBoundary>
+
                    </Authenticate.Provider>
+          </ErrorBoundary>
   )
 }
 
 export function Verify (){
 
-const value = useContext(Authenticate)
-        const [verified, isVerified] = useState(value)
+    const {verified, isVerified} = useContext(Authenticate)
+    
     const UserVerification = ()=> {
        if  (!verified.isAuthenticated) {
            isVerified({isAuthenticated: true})

@@ -1,10 +1,10 @@
-
 import { useNavigate } from "react-router-dom"
 import useDocumentTitle from "./useDocumentTitle"
 
 const Login = ({setUser})=> {
 useDocumentTitle('Login - fakeuserAuth')
     const navigate = useNavigate()
+    
     // isVerified({isAuthenticated: false})
     const getUser = (e)=> {
         e.preventDefault()
