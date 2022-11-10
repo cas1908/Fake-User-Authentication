@@ -22,7 +22,7 @@ const handleLogout = () => {
     return (
         <div>
             <Navigation />
-            <h1>Hello {user}</h1>
+            <h1>Hello {user.toUpperCase()}</h1>
             <div className="home-btns">
                 <button onClick={()=>{
                 navigate('/verify')
