@@ -7,14 +7,13 @@ import Home from './components/Home'
 import Navigation from './components/Navigation'
 import PageNotFound from './components/PageNotFound'
 import {ErrorBoundary} from 'react-error-boundary'
-import { createContext, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
+import Authenticate from './components/Authenticate'
 
 
-const UserAuthentication = {
-    isAuthenticated: false
-}
 
-const Authenticate = createContext(UserAuthentication)
+
+// const Authenticate = createContext(UserAuthentication)
 
 
 
